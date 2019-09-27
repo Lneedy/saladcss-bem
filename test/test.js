@@ -1,6 +1,6 @@
 var postcss = require('postcss');
 var expect  = require('chai').expect;
-var fs = require('fs');
+// var fs = require('fs');
 
 var plugin = require('../');
 
@@ -18,10 +18,10 @@ function test (input, output, opts, done) {
     });
 }
 
-function f(name) {
-    var fullName = './test/fixtures/' + name + '.css';
-    return fs.readFileSync(fullName, 'utf8').trim();
-}
+// function f(name) {
+//     var fullName = './test/fixtures/' + name + '.css';
+//     return fs.readFileSync(fullName, 'utf8').trim();
+// }
 
 function testSame(input1, input2, opts, done) {
     var asyncResults  = [
@@ -362,9 +362,9 @@ describe('postcss-bem', function () {
                     '@component component-name {color: red; text-align: right; @modifier modifier-name {color: blue; text-align: left;}}',
                     '@component component-name {color: red; text-align: right; @m modifier-name {color: blue; text-align: left;}}', useBem, done);
             });
-            it('is beatiful', function(done){
-                test(f('shortcuts.bem'), f('shortcuts.bem.expected'), useBem, done);
-            });
+            // it('is beatiful', function(done){
+            //     test(f('shortcuts.bem'), f('shortcuts.bem.expected'), useBem, done);
+            // });
         });
         describe('suit', function() {
             it('shortcut for component behaves the same way as component', function (done) {

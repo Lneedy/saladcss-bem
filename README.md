@@ -2,107 +2,109 @@
 
 [PostCSS] plugin implementing BEM as at-rules.
 
-[PostCSS]: https://github.com/postcss/postcss
-[ci-img]:  https://travis-ci.org/ileri/postcss-bem.svg
-[ci]:      https://travis-ci.org/ileri/postcss-bem
-
 ```css
 @utility utilityName {
-    color: green;
+  color: green;
 }
 
 @utility utilityName small {
-    color: blue;
+  color: blue;
 }
 
 @component ComponentName {
-    color: cyan;
+  color: cyan;
 
-    @modifier modifierName {
-        color: yellow;
-    }
+  @modifier modifierName {
+    color: yellow;
+  }
 
-    @descendent descendentName {
-        color: navy;
-    }
+  @descendent descendentName {
+    color: navy;
+  }
 
-    @when stateName {
-        color: crimson;
-    }
+  @when stateName {
+    color: crimson;
+  }
 }
 
 @component-namespace nmsp {
-    @component ComponentName {
-        color: red;
-    }
+  @component ComponentName {
+    color: red;
+  }
 }
 ```
 
 ```css
 .u-utilityName {
-    color: green;
+  color: green;
 }
 
 .u-sm-utilityName {
-    color: blue;
+  color: blue;
 }
 
 .ComponentName {
-    color: cyan;
+  color: cyan;
 }
 
 .ComponentName--modifierName {
-    color: yellow;
+  color: yellow;
 }
 
 .ComponentName-descendentName {
-    color: navy;
+  color: navy;
 }
 
 .ComponentName.is-stateName {
-    color: crimson;
+  color: crimson;
 }
 
 .nmsp-ComponentName {
-    color: red;
+  color: red;
 }
 ```
 
 **With shortcuts**
+
 ```css
-@b nav { /* b is for block */
-    @e item { /* e is for element */
-        display: inline-block;
-    }
-    @m placement_header {
-        background-color: red;
-    }
+@b nav {
+  /* b is for block */
+  @e item {
+    /* e is for element */
+    display: inline-block;
+  }
+  @m placement_header {
+    background-color: red;
+  }
 }
 ```
 
 ```css
-.nav {}
+.nav {
+}
 .nav__item {
-    display: inline-block
+  display: inline-block;
 }
 .nav_placement_header {
-    background-color: red
+  background-color: red;
 }
 ```
 
 ## Usage
 
 ```js
-postcss([ require('postcss-bem')({
+postcss([
+  require('postcss-bem')({
     defaultNamespace: undefined, // default namespace to use, none by default
     style: 'suit', // suit or bem, suit by default,
     separators: {
-        descendent: '__' // overwrite any default separator for chosen style
+      descendent: '__' // overwrite any default separator for chosen style
     },
     shortcuts: {
-        utility: 'util' //override at-rule name
+      utility: 'util' //override at-rule name
     }
-}) ])
+  })
+])
 ```
 
 See [PostCSS] docs for examples for your environment.

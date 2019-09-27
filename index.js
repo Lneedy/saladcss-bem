@@ -93,7 +93,9 @@ module.exports = postcss.plugin('postcss-bem', function (opts) {
                 if (subrule) {
                     last = subrule;
                 } else {
-                    node.moveTo(newRule);
+                    node.cleanRaws(node.root() === newRule.root());
+                    node.remove();
+                    newRule.append(node);
                 }
             });
             rule.remove();
@@ -123,7 +125,9 @@ module.exports = postcss.plugin('postcss-bem', function (opts) {
             if (newRule) {
                 last = newRule;
             } else {
-                rule.moveTo(newComponent);
+                rule.cleanRaws(rule.root() === newComponent.root());
+                rule.remove();
+                newComponent.append(rule);
             }
         });
 
@@ -180,7 +184,9 @@ module.exports = postcss.plugin('postcss-bem', function (opts) {
                 });
 
                 utility.each(function (node) {
-                    node.moveTo(newUtility);
+                    node.cleanRaws(node.root() === newUtility.root());
+                    node.remove();
+                    newUtility.append(node);
                 });
                 utility.replaceWith(newUtility);
             });
@@ -203,7 +209,9 @@ module.exports = postcss.plugin('postcss-bem', function (opts) {
 
             var node = namespace.last;
             while (node) {
-                node.moveAfter(namespace);
+                node.cleanRaws(node.root() === namespace.root());
+                node.remove();
+                namespace.parent.insertAfter(namespace, node);
                 node = namespace.last;
             }
             namespace.remove();
@@ -242,9 +250,13 @@ module.exports = postcss.plugin('postcss-bem', function (opts) {
                 });
 
                 when.each(function (node) {
-                    node.moveTo(newWhen);
+                    node.cleanRaws(node.root() === newWhen.root());
+                    node.remove();
+                    newWhen.append(node);
                 });
-                newWhen.moveAfter(parent);
+                newWhen.cleanRaws(newWhen.root() === parent.root());
+                newWhen.remove();
+                parent.parent.insertAfter(parent, newWhen);
                 when.remove();
             });
         }
